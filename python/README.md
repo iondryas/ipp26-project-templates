@@ -8,9 +8,9 @@ máte využít pro kontrolu kvality kódu a pro kontrolu typových anotací. Do 
 
 Jakmile jsou nástroje nainstalovány ve vašem pythonovém prostředí, lze je spustit z kořenového 
 adresáře projektu pomocí `ruff` a `mypy` (viz níže). Doporučujeme oba nástroje spouštět **pravidelně**
-v průběhu vývoje – jinak se chyby zvládnou velice rychle nahromadit. Také doporučujeme využít rozšíření
-pro různá IDE či editory kódu existují rozšíření, která umí Ruff integrovat přímo do svých kontrol kódu
-(např. pro IntelliJ PyCharm doporučuji rozšíření [RyeCharm](https://plugins.jetbrains.com/plugin/25230-ryecharm)).
+v průběhu vývoje – jinak se chyby zvládnou velice rychle nahromadit. Pro různá IDE či editory kódu 
+také existují rozšíření, která umí Ruff integrovat přímo do svých kontrol kódu (např. pro JetBrains
+PyCharm doporučuji rozšíření [RyeCharm](https://plugins.jetbrains.com/plugin/25230-ryecharm)).
 
 Velmi doporučujeme využít nástroj [pre-commit](https://pre-commit.com/), který se integruje s gitem
 a při každém commitu automaticky spustí kontroly oběma nástroji. V případě, že kontroly selžou,
