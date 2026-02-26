@@ -4,6 +4,7 @@ It serves as the reference for the testing tool's expected output data structure
 
 Author: Ondřej Ondryáš <iondryas@fit.vut.cz>
 """
+
 from enum import IntEnum, StrEnum
 from pathlib import Path
 from typing import Self
@@ -29,17 +30,49 @@ class TestCaseDefinition(BaseModel):
          You may create your own internal models derived from this one.
     """
 
-    name: str
-    test_type: TestCaseType
-    description: str | None = None
-    category: str
-    points: int
-    source_code: str
-    test_source_path: Path
-    stdin_file: Path | None = None
-    expected_stdout_file: Path | None = None
-    expected_parser_exit_codes: list[int] | None = None
-    expected_interpreter_exit_codes: list[int] | None = None
+    name: str = Field(
+        description="The test case name, derived from the test case file name without "
+        "the '.test' extension.",
+    )
+    test_type: TestCaseType = Field(
+        description="The type of the test case, which determines how it should be executed "
+        "and what exit codes are expected."
+    )
+    description: str | None = Field(
+        default=None, description="An optional human-readable description of the test case."
+    )
+    category: str = Field(
+        description="A string identifier of a category to which this test case belongs."
+        "Used for grouping test cases in the final report and for filtering which "
+        "test cases to execute."
+    )
+    points: int = Field(
+        default=1, description="The number of points awarded for passing this test case."
+    )
+    test_source_path: Path = Field(description="Path to the test case definition file ('.test').")
+    stdin_file: Path | None = Field(
+        default=None,
+        description="Path to a file with the standard input contents for the interpreter."
+        "Present if the '.in' file was discovered.",
+    )
+    expected_stdout_file: Path | None = Field(
+        default=None,
+        description="Path to a file with the expected standard output of the interpreter. "
+        "Present if the '.out' file was discovered.",
+    )
+    expected_parser_exit_codes: list[int] | None = Field(
+        default=None,
+        description="A list of expected parser exit codes. "
+        "Must be present for parser-only test cases. "
+        "Must be null for interpreter-only test cases. "
+        "Must be null or [0] for combined test cases.",
+    )
+    expected_interpreter_exit_codes: list[int] | None = Field(
+        default=None,
+        description="A list of expected interpreter exit code. "
+        "Must be present for interpreter-only and combined test cases. "
+        "Must be null for parser-only test cases.",
+    )
 
     @model_validator(mode="after")
     def validate_exit_codes(self) -> Self:
@@ -103,6 +136,8 @@ class UnexecutedReason(BaseModel):
     """
     Represents the reason why a test case was not executed, including an optional
     human-readable message.
+
+    IPP: Choose a suitable message, it won't be evaluated automatically.
     """
 
     code: UnexecutedReasonCode
@@ -134,9 +169,15 @@ class TestCaseReport(BaseModel):
 class CategoryReport(BaseModel):
     """Represents the report for a category of test cases."""
 
-    total_points: int
-    passed_points: int
-    test_results: dict[str, TestCaseReport]
+    total_points: int = Field(
+        description="The sum of points for all executed test cases in this category."
+    )
+    passed_points: int = Field(
+        description="The sum of points for all passed test cases in this category."
+    )
+    test_results: dict[str, TestCaseReport] = Field(
+        description="A mapping from test case names to their individual reports."
+    )
 
 
 class TestReport(BaseModel):
