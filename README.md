@@ -5,11 +5,12 @@ jazycích, ve kterých můžete dle zadání projekt řešit. Dále je zde dostu
 a různé ukázkové soubory.
 
 Aktuální stav:
-- Python: obě šablony považovány za stabilní, přijímáme tipy k vylepšení.
-  - Zbývá doplnit README k šabloně interpretu.
-- TypeScript: aktuálně není zcela stabilní, ještě může docházet k větším změnám (do cca 2. 3.).
-- PHP: šablony jsou zatím nedostupné (budou zveřejněny do cca 2. 3.).
-- překladač SOL2XML: považován za stabilní, přijímáme reporty chyb.
+- Python: obě šablony považovány za stabilní, přijímáme tipy k vylepšení a reporty chyb.
+    - Ještě budou doplněny README soubory.
+- TypeScript: obě šablony považovány za stabilní, přijímáme tipy k vylepšení a reporty chyb.
+    - Ještě budou doplněny README soubory.
+- PHP: šablony jsou zatím nedostupné (budou zveřejněny do konce týdne 2. 3 – 8. 3.).
+- Překladač SOL2XML: považován za stabilní, přijímáme tipy k vylepšení a reporty chyb.
 
 V průběhu týdne 2. 3. – 8. 3. budou postupně doplňovány také příklady programů v jazyce SOL26
 i v jeho SOL-XML reprezentaci a také ukázky Containerfile (Dockerfile) souborů, ze kterých
