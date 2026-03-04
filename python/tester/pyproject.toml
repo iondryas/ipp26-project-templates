@@ -3,7 +3,7 @@ name = "sol26-tester"
 version = "1.0.0"
 description = "An integration testing script for the SOL26 interpreter."
 readme = "README.md"
-requires-python = ">=3.13"
+requires-python = ">=3.14"
 dependencies = [
     "pydantic~=2.12.5",
 ]
@@ -15,7 +15,7 @@ dev = [
 ]
 
 [tool.mypy]
-python_version = "3.13"
+python_version = "3.14"
 strict = true
 pretty = true
 show_error_context = true
@@ -30,7 +30,7 @@ plugins = [
 [tool.ruff]
 src = ["src"]
 line-length = 99
-target-version = "py313"
+target-version = "py314"
 show-fixes = true
 output-format = "full"
 
