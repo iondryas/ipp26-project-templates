@@ -8,7 +8,9 @@
  */
 
 import { readFileSync, statSync } from "node:fs";
+import { basename } from "node:path";
 import { Readable } from "node:stream";
+import { parseArgs } from "node:util";
 
 import { ErrorCode, fireError } from "./interpreter/error_codes.js";
 import { InterpreterError } from "./interpreter/exceptions.js";
@@ -38,16 +40,19 @@ class CliArgumentParsingError extends Error {
   }
 }
 
-function readRequiredOptionValue(
-  argv: string[],
-  currentIndex: number,
-  optionName: string
-): [string, number] {
-  const value = argv[currentIndex + 1];
-  if (value === undefined || value.startsWith("-")) {
-    throw new CliArgumentParsingError(`Missing value for ${optionName}`);
-  }
-  return [value, currentIndex + 2];
+function formatHelpText(progName: string): string {
+  return [
+    `usage: ${progName} [-h] -s SOURCE [-i INPUT] [-v]`,
+    "",
+    "options:",
+    "  -h, --help            show this help message and exit",
+    "  -s SOURCE, --source SOURCE",
+    "                        Path to the SOL-XML source file to be interpreted.",
+    "  -i INPUT, --input INPUT",
+    "                        Path to a file that will be used as the standard input for the interpreted program (optional).",
+    "  -v, --verbose         Enable verbose logging output (using once = INFO level, using twice = DEBUG level).",
+    "",
+  ].join("\n");
 }
 
 function parseArguments(argv: string[]): CliArguments {
@@ -55,41 +60,34 @@ function parseArguments(argv: string[]): CliArguments {
    * Parses interpreter CLI arguments.
    */
 
-  let source: string | null = null;
-  let input: string | null = null;
-  let verbose = 0;
+  const parsedArguments = parseArgs({
+    args: argv,
+    options: {
+      help: { type: "boolean", short: "h" },
+      source: { type: "string", short: "s" },
+      input: { type: "string", short: "i" },
+      verbose: { type: "boolean", short: "v", multiple: true },
+    },
+    allowPositionals: false,
+    strict: true,
+  });
 
-  let index = 0;
-  while (index < argv.length) {
-    const current = argv[index];
-    if (current === undefined) {
-      break;
-    }
-
-    if (current === "-s" || current === "--source") {
-      [source, index] = readRequiredOptionValue(argv, index, "--source");
-      continue;
-    }
-
-    if (current === "-i" || current === "--input") {
-      [input, index] = readRequiredOptionValue(argv, index, "--input");
-      continue;
-    }
-
-    if (current === "-v" || current === "--verbose") {
-      verbose += 1;
-      index += 1;
-      continue;
-    }
-
-    throw new CliArgumentParsingError(`Unknown argument: ${current}`);
+  if (parsedArguments.values.help) {
+    process.stdout.write(formatHelpText(basename(process.argv[1] ?? "solint")));
+    process.exit(0);
   }
 
-  if (source === null) {
+  if (parsedArguments.values.source === undefined) {
     throw new CliArgumentParsingError("Missing required argument --source");
   }
 
-  return { source, input, verbose };
+  const verbose = parsedArguments.values.verbose?.length ?? 0;
+
+  return {
+    source: parsedArguments.values.source,
+    input: parsedArguments.values.input ?? null,
+    verbose,
+  };
 }
 
 function parseArgumentsOrFire(argv: string[]): CliArguments {
