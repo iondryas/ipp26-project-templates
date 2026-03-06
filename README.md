@@ -9,7 +9,7 @@ Aktuální stav:
     - Ještě budou doplněny README soubory.
 - TypeScript: obě šablony považovány za stabilní, přijímáme tipy k vylepšení a reporty chyb.
     - Ještě budou doplněny README soubory.
-- PHP: šablony jsou zatím nedostupné (budou zveřejněny do konce týdne 2. 3 – 8. 3.).
+- PHP: šablona interpretu zveřejněna (může docházet k drobným změnám), šablona testovacího nástroje bude zveřejněna do 8. 3.
 - Překladač SOL2XML: považován za stabilní, přijímáme tipy k vylepšení a reporty chyb.
 
 V průběhu týdne 2. 3. – 8. 3. budou postupně doplňovány také příklady programů v jazyce SOL26
