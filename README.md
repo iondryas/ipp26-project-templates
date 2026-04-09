@@ -25,6 +25,7 @@ Níže jsou uvedeny (v sestupném pořadí dle data) „zásadnější“ změny
 
 | Datum    | Commit    | Popis
 | -------- | --------- | -----
+| 26-04-09 | `8e1fc87` | V TS šabloně interpretu opravena absence deserializace potřebných XML entit v řetězcích.
 | 26-03-27 | `be87d45` | V Py šabloně testovacího nástroje povoleno ignorovat chybová hlášení související se spouštěním procesů.
 | 26-03-27 | `1dc41a1` | V PHP šabloně testovacího nástroje odstraněna pravidla zamezující spouštění nových procesů.
 | 26-03-08 | `64b94c1` | V Py šabloně interpretu opravena nesprávná deserializace XML (ve specifických a námi netestovaných případech).
