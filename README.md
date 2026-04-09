@@ -7,15 +7,15 @@ a různé ukázkové soubory.
 Aktuální stav:
 - Všechny šablony i překladač SOL2XML jsou zveřejněny a považovány za stabilní. 
   Přijímáme tipy k vylepšení a především reporty chyb (na fóru nebo na discordu).
-  Doporučujeme repozitář sledovat, ale na případné důležité změny budeme upozorňovat i pomocí
-  aktualit z předmětu.
-- Ještě budou doplněny README soubory (zejména k šablonám interpretu).
+  Doporučujeme repozitář sledovat, ale na případné důležité změny budeme upozorňovat i pomocí aktualit z předmětu.
 
 Postupně budou doplňovány také příklady programů v jazyce SOL26 i v jeho SOL-XML reprezentaci 
 a také ukázky Containerfile (Dockerfile) souborů, ze kterých můžete vycházet při kontejnerizaci.
 
 Věnujte pozornost README souborům v jednotlivých adresářích, obsahují podrobné pokyny platné
 pro jednotlivé jazyky.
+
+V adresáři `examples/` najdete několik příkladů v jazyce SOL26 (pozor, ne všechny jsou nutně „spustitelné“ – může jít spíše o okomentované fragmenty kódu vysvětlující konkrétní situaci) a také popis způsobu, jakým budou spouštěny vaše kontejnery (adresář `examples/docker/`).
 
 ## Podstatné změny
 
