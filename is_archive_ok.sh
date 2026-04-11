@@ -771,7 +771,7 @@ build_and_test_runtime() {
 <?xml version="1.0" encoding="UTF-8"?>
 <program language="SOL26">
   <class name="Main" parent="Object">
-    <method name="run" selector="run">
+    <method selector="run">
       <block arity="0">
       </block>
     </method>
