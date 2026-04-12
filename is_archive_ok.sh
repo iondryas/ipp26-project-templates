@@ -309,6 +309,9 @@ check_filename_chars() {
 
     local found_bad=false
 
+    export LC_ALL=C
+    export LANG=C
+
     while IFS= read -r -d '' item; do
         local name
         name=$(basename "${item}")
